@@ -14,6 +14,11 @@ app.post '/', (req, res, next) ->
         action: 'VERIFY'
         message:
           secret: sha1(config.secret)
+    when 'TICK'
+      res.json
+        action: 'NOOP'
+        message:
+          secret: sha1(config.secret)
     else
       next('UNKNOWN_MESSAGE_TYPE')
 
