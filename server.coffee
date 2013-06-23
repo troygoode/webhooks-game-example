@@ -8,10 +8,12 @@ app.use express.bodyParser()
 app.use app.router
 
 app.post '/', (req, res, next) ->
-  switch req.body.messageType
+  switch req.body.request
     when 'VERIFY'
       res.json
-        secret: sha1(config.secret)
+        action: 'VERIFY'
+        message:
+          secret: sha1(config.secret)
     else
       next('UNKNOWN_MESSAGE_TYPE')
 
